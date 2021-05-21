@@ -3,14 +3,32 @@ import aiohttp
 
 class NonManner():
     def __init__(self):
-        self.url = "https://userdb.ourmc.space/api/v1"
+        self.url = "https://userdb.ourmc.space/api/v1/report"
 
-    async def search_by_name(self, username):
+    async def search_by_name(self, username: str, skip=0, limit=100):
+        return await self.aiohttp_request("search", username, skip, limit)
+
+    async def get_all(self, skip=0, limit=100):
+        return await self.aiohttp_request("all", "nobody", skip, limit)
+
+    async def get_count(self, uuid: str):
+        return await self.aiohttp_request("reportcount", uuid)
+
+    async def get_user(self, uuid: str):
+        return await self.aiohttp_request("user", uuid)
+
+    async def aiohttp_request(self, point: str, user: str, skip=0, limit=100):
+        params = {"skip": skip, "limit": limit}
         async with aiohttp.ClientSession() as session:
-            async with session.get(f"{self.url}/report/search/{username}") as result:
-                response = await result.json(content_type=None)
-                rs = response["value"]
-                if rs["count"] is 0:
-                    return {"result": False}
-                else:
-                    return {"result": True, "reason": rs["list"][0]["specificReason"]}
+            if point is "reportcount":
+                async with session.get(f"{self.url}/reportcount/{user}") as result:
+                    return await result.json(content_type=None)
+            elif point is "user":
+                async with session.get(f"{self.url}/user/{user}") as result:
+                    return await result.json(content_type=None)
+            elif point is "all":
+                async with session.get(f"{self.url}/all", params=params) as result:
+                    return await result.json(content_type=None)
+            elif point is "search":
+                async with session.get(f"{self.url}/search/{user}", params=params) as result:
+                    return await result.json(content_type=None)
