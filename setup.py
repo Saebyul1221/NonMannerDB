@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='NonMannerDB',
-    version='1.0.1',
+    version='1.0.2',
     description='우마공DB 전용 라이브러리',
     long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
