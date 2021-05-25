@@ -14,7 +14,7 @@ class NonManner:
         return await self.__aiohttp_request("search", username, skip, limit)
 
     async def get_all(self, skip=0, limit=100):
-        return await self.__aiohttp_request("all", "nobody", skip, limit)
+        return await self.__aiohttp_request("all", skip=skip, limit=limit)
 
     async def get_count(self, uuid: str):
         return await self.__aiohttp_request("reportcount", uuid)
@@ -22,7 +22,7 @@ class NonManner:
     async def get_user(self, uuid: str):
         return await self.__aiohttp_request("user", uuid)
 
-    async def __aiohttp_request(self, point: str, user: str, skip=0, limit=100):
+    async def __aiohttp_request(self, point: str, user: str = "", skip=0, limit=100):
         params = {"skip": skip, "limit": limit}
         if point not in ["reportcount", "user", "all", "search"]:
             raise BadInput("Cannot find endpoint that named {point}")
