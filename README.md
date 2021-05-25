@@ -18,10 +18,10 @@
 > asyncio.run(main())
 > ```
 
-\***\*사용 가능한 메서드 종류\*\***
+**사용 가능한 메서드 종류**
 
 - **`search_by_name(username="유저 이름", skip=0, limit=100)`**
 - **`get_all(skip=0, limit=100)`**
 - **`get_count(uuid="유저 UUID")`**
-- **`get_user(uuid="유저 UUID")`**
+- **`get_user(uuid="유저 UUID")`**  
   skip, limit 파라미터는 생략할 수 있습니다.
