@@ -1,8 +1,8 @@
 # 우마공 비매너 DB 라이브러리
 
 > `pip install NonMannerDB`
->
-> \***\*사용 예시\*\***
+
+**사용 예시**
 
 > ```py
 > import NonMannerDB
