@@ -6,6 +6,7 @@ setup(
     version='1.0.1',
     description='우마공DB 전용 라이브러리',
     long_description=open('README.md', encoding='utf-8').read(),
+    long_description_content_type='text/markdown',
     author='WhiteKJ',
     author_email='whitekj1221@gmail.com',
     url='https://github.com/CwhiteKJ/NonMannerDB',
