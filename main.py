@@ -1,8 +1,10 @@
 import aiohttp
 
+
 class BadInput:
     def __init__(self, msg="Bad Input"):
         super().__init__(msg)
+
 
 class NonManner:
     def __init__(self):
@@ -26,5 +28,5 @@ class NonManner:
             raise BadInput("Cannot find endpoint that named {point}")
 
         async with aiohttp.ClientSession() as session:
-            async with session.get(f"{self.url}/{point}/{user}", param=param) as result:
+            async with session.get(f"{self.url}/{point}/{user}", params=params) as result:
                 return await result.json(content_type=None)
