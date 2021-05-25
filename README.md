@@ -1,26 +1,27 @@
-# 우마공 비매너 DB
+# 우마공 비매너 DB 라이브러리
 
-**`search_by_name()`** : 전체 제보 정보를 최신순으로 가져옵니다.
-|파라미터|타입|설명|기본값|필수|
-|-------|----|----|-----|----|
-|username|**str**|조회할 유저의 이름|없음|O|
-|skip|**int**|생략할 결과의 갯수|0|X|
-|limit|**int**|조회할 결과의 수(최대 1000)|100|X|
+> `pip install NonMannerDB`
+>
+> \***\*사용 예시\*\***
 
-**`get_all()`** : 입력한 닉네임이 포함되는 피제보자의 제보들을 최신순으로 가져옵니다.
-|파라미터|타입|설명|기본값|필수|
-|-------|----|----|-----|----|
-|skip|**int**|생략할 결과의 갯수|0|X|
-|limit|**int**|조회할 결과의 수(최대 1000)|100|X|
+> ```py
+> import NonMannerDB
+> import asyncio
+>
+>
+> async main():
+>   client = NonMannerDB.NonManner()
+>   result = client.search_by_name("Username")
+>
+>   print(result) # {'success': True, 'value': {'count': 0, 'list': []}}
+>
+> asyncio.run(main())
+> ```
 
-**`get_count()`** : 해당 UUID를 가진 피제보자의 제보 갯수를 가져옵니다.
-|파라미터|타입|설명|기본값|필수|
-|-------|----|----|-----|----|
-|uuid|**str**|조회할 유저의 UUID|없음|O|
+\***\*사용 가능한 메서드 종류\*\***
 
-**`get_user()`** : 해당 UUID를 가진 피제보자의 제보를 가져옵니다.
-|파라미터|타입|설명|기본값|필수|
-|-------|----|----|-----|----|
-|uuid|**str**|조회할 유저의 UUID|없음|O|
-
-**[Issue](https://github.com/CwhiteKJ/Miho/issues/new) 및 [Pull Request](https://github.com/CwhiteKJ/Miho/compare)는 환영합니다.**
+- **`search_by_name(username="유저 이름", skip=0, limit=100)`**
+- **`get_all(skip=0, limit=100)`**
+- **`get_count(uuid="유저 UUID")`**
+- **`get_user(uuid="유저 UUID")`**
+  skip, limit 파라미터는 생략할 수 있습니다.
