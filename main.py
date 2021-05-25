@@ -1,7 +1,10 @@
 import aiohttp
 
+class BadInput:
+    def __init__(self, msg="Bad Input"):
+        super().__init__(msg)
 
-class NonManner():
+class NonManner:
     def __init__(self):
         self.url = "https://userdb.ourmc.space/api/v1/report"
 
@@ -19,16 +22,9 @@ class NonManner():
 
     async def __aiohttp_request(self, point: str, user: str, skip=0, limit=100):
         params = {"skip": skip, "limit": limit}
+        if point not in ["reportcount", "user", "all", "search"]:
+            raise BadInput("Cannot find endpoint that named {point}")
+
         async with aiohttp.ClientSession() as session:
-            if point is "reportcount":
-                async with session.get(f"{self.url}/reportcount/{user}") as result:
-                    return await result.json(content_type=None)
-            elif point is "user":
-                async with session.get(f"{self.url}/user/{user}") as result:
-                    return await result.json(content_type=None)
-            elif point is "all":
-                async with session.get(f"{self.url}/all", params=params) as result:
-                    return await result.json(content_type=None)
-            elif point is "search":
-                async with session.get(f"{self.url}/search/{user}", params=params) as result:
-                    return await result.json(content_type=None)
+            async with session.get(f"{self.url}/{point}/{user}", param=param) as result:
+                return await result.json(content_type=None)
